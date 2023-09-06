@@ -1,0 +1,53 @@
+﻿<Window x:Class="ViewSonic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewSonic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">    <!-- Top menu-->
+                <MenuItem Header="Files">
+                    <MenuItem Header="Load Image" Click="MenuItem_Load_Click"/>
+                    <MenuItem Header="Save Image" Click="MenuItem_Save_Click"/>
+
+                    <MenuItem Header="Exit" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem Header="Draw" Command="{Binding DrawCommand}"/>
+                    <MenuItem Header="Erase" Click="EraseButton_Click"/>
+                    <MenuItem Header="Select" Click="SelectButton_Click"/>
+                    <MenuItem Header="Clean" Click="CleanButton_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <Label Name="Coordinate" DockPanel.Dock="Bottom" Content="x: y:"/>
+            
+            <Border DockPanel.Dock="Left">    <!-- Tool menu-->
+                <DockPanel Background="Gray">
+                    <StackPanel>
+                        <Button Name="DrawButton" Content="Draw" Height="40" Margin="5" Command="{Binding DrawCommand}"></Button>
+                        <Button Name="EraseButton" Content="Erase" Height=" 40" Margin=" 5" Click="EraseButton_Click"></Button>
+                        <Button Name="SelectButton" Content="Select" Height=" 40" Margin=" 5" Click="SelectButton_Click"></Button>
+                        <Button Name="RectanglesButton" Content="Rectangles" Height=" 40" Margin=" 5" Click="RectanglesButton_Click"></Button>
+                        <Button Name="EllipsesButton"  Content="Ellipses" Height=" 40" Margin=" 5" Click="EllipsesButton_Click"></Button>
+                        <Button Name="TrianglesButton"  Content="Triangles" Height=" 40" Margin=" 5" Click="TrianglesButton_Click"></Button>
+
+                        <ComboBox Name="ColorBox" Height=" 20" Margin=" 5" ItemsSource="{Binding BrushColorList}" SelectedItem="{Binding Color}" >
+                        </ComboBox>
+                        <TextBox Name="ThicknessBox" Height=" 20" Margin=" 5" Text="{Binding thickness, FallbackValue=2, Mode=TwoWay}"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            
+            <Border DockPanel.Dock="Right" Focusable="True">    <!-- Draw area-->
+                <Canvas x:Name="DrawAreaCanvas" Background="White" VerticalAlignment="Stretch" Height="400" MouseLeftButtonDown="DrawArea_MouseLeftButtonDown" MouseLeftButtonUp="DrawArea_MouseLeftButtonUp" >
+                        
+                </Canvas>
+            </Border>
+        </DockPanel>
+
+    </Grid>
+</Window>
